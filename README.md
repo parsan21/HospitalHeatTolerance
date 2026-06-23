@@ -108,7 +108,6 @@ Recommendations are maintained in a configurable data structure to allow future 
 * Next.js
 * TypeScript
 * Tailwind CSS
-* Responsive design
 
 ### Hosting
 
@@ -123,12 +122,3 @@ Recommendations are maintained in a configurable data structure to allow future 
 * Configurable question catalog
 * Configurable weighting system
 * Recommendation mapping
-
-## Future Enhancements
-
-* PDF report generation
-* Benchmarking between hospitals
-* Multi-language support
-* User authentication
-* Historical assessments and progress tracking
-* Export to Excel/PDF
