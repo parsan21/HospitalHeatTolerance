@@ -117,18 +117,3 @@ Recommendations are maintained in a configurable data structure to allow future 
 ### Visualization
 
 * Radar/Spider Chart library (e.g., Recharts)
-
-### Data Management
-
-* Configurable question catalog
-* Configurable weighting system
-* Recommendation mapping
-
-## Future Enhancements
-
-* PDF report generation
-* Benchmarking between hospitals
-* Multi-language support
-* User authentication
-* Historical assessments and progress tracking
-* Export to Excel/PDF
