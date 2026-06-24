@@ -19,10 +19,9 @@ export async function GET() {
     .select('id, score, answers, created_at, updated_at')
     .eq('user_id', session.user.id)
     .order('updated_at', { ascending: false })
-    .limit(1)
-    .single();
+    .maybeSingle();
 
-  if (error && error.code !== 'PGRST116') {
+  if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
@@ -49,22 +48,25 @@ export async function POST(request: NextRequest) {
 
   const assessmentResult = calculateAssessment(questions, answers);
   const { data, error } = await supabase
-  .from('assessments')
-  .upsert(
-    {
-      user_id: session.user.id,
-      score: assessmentResult.normalizedTotal,
-      answers,
-    },
-    {
-      onConflict: 'user_id',
-    }
-  )
-  .select()
-  .single();
+    .from('assessments')
+    .upsert(
+      [
+        {
+          user_id: session.user.id,
+          score: assessmentResult.normalizedTotal,
+          answers,
+        },
+      ],
+      {
+        onConflict: 'user_id',
+      }
+    )
+    .select()
+    .maybeSingle();
+
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ assessment: data?.[0] ?? null });
+  return NextResponse.json({ assessment: data ?? null });
 }

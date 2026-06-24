@@ -9,17 +9,20 @@ export default function AuthCallback() {
 
   useEffect(() => {
     const handleCallback = async () => {
-      const { error } = await supabase.auth.getSession();
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession();
 
-      if (!error) {
-        router.push('/');
+      if (session && !error) {
+        router.replace('/assessment');
       } else {
-        router.push('/login');
+        router.replace('/login');
       }
     };
 
     handleCallback();
   }, [router]);
 
-  return <p>Logging you in...</p>;
+  return <p className="min-h-screen flex items-center justify-center text-slate-700">Logging you in…</p>;
 }

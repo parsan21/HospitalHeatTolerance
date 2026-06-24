@@ -13,7 +13,7 @@ export default function LoginForm() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: `${window.location.origin}/login/callback`,
       },
     });
 
@@ -31,7 +31,7 @@ export default function LoginForm() {
         <h1 className="text-3xl font-semibold text-slate-900">Login</h1>
 
         <p className="mt-3 text-slate-600">
-          Melde dich mit deiner E-Mail an, um deine Assessment-Daten zu speichern.
+          Melden Sie sich mit Ihrer E-Mail an, um Ihre Assessment-Daten zu speichern.
         </p>
 
         <div className="mt-8 flex flex-col gap-4">

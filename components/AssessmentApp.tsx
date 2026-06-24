@@ -28,11 +28,18 @@ export function AssessmentApp() {
   useEffect(() => {
     async function loadAssessment() {
       const response = await fetch('/api/assessments');
-      if (!response.ok) {
+      const json = await response.json();
+
+      if (response.status === 401) {
+        router.replace('/login');
         return;
       }
 
-      const json = await response.json();
+      if (!response.ok) {
+        setIsLoading(false);
+        return;
+      }
+
       const assessmentData: StoredAssessment | null = json.assessment;
 
       if (assessmentData?.answers) {
@@ -44,7 +51,7 @@ export function AssessmentApp() {
     }
 
     loadAssessment();
-  }, []);
+  }, [router]);
 
   async function handleSave() {
     setSaveMessage('Speichere Assessment...');
