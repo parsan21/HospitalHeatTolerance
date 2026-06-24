@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Answer, CategoryKey, StoredAssessment } from '@/lib/types';
 import { calculateAssessment, buildEmptyAnswers, getRecommendationsForCategory } from '@/lib/scoring';
+import { supabase } from '@/lib/supabaseClient';
 import { questions, categories } from '@/data/questions';
 import { recommendations } from '@/data/recommendations';
 import { QuestionStep } from './QuestionStep';
@@ -18,6 +19,7 @@ export function AssessmentApp() {
   const [savedAssessment, setSavedAssessment] = useState<StoredAssessment | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [saveMessage, setSaveMessage] = useState('');
+  const [isSigningOut, setIsSigningOut] = useState(false);
   const router = useRouter();
 
   const assessment = useMemo(() => calculateAssessment(questions, answers), [answers]);
@@ -91,6 +93,12 @@ export function AssessmentApp() {
     setSelectedCategory(category);
   }
 
+  async function handleLogout() {
+    setIsSigningOut(true);
+    await supabase.auth.signOut();
+    router.push('/login');
+  }
+
   function handleReset() {
     setAnswers(buildEmptyAnswers(questions));
     setActiveStep(0);
@@ -105,6 +113,17 @@ export function AssessmentApp() {
   if (activeStep >= categoryOrder.length) {
     return (
       <div className="container py-10">
+        <div className="flex items-center justify-end gap-3 mb-6">
+          <button
+            type="button"
+            onClick={handleLogout}
+            disabled={isSigningOut}
+            className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {isSigningOut ? 'Logout...' : 'Logout'}
+          </button>
+        </div>
+
         <ResultDashboard
           assessment={assessment}
           categories={categories}
@@ -158,14 +177,23 @@ export function AssessmentApp() {
         <QuestionStep questions={categoryQuestions} answers={answers} onAnswerChange={handleAnswerChange} />
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <button
-            type="button"
-            className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-            onClick={handleBack}
-            disabled={activeStep === 0}
-          >
-            Zurück
-          </button>
+          {activeStep > 0 ? (
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              onClick={handleBack}
+            >
+              Zurück
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-400"
+              disabled
+            >
+              Zurück
+            </button>
+          )}
           <button
             type="button"
             className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800"
