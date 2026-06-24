@@ -14,7 +14,7 @@ export default function LoginPage() {
           </h1>
 
     <p className="text-lg text-slate-600 leading-relaxed">
-  Das Hospital Heat Resilience Assessment (HHRA) ist ein webbasiertes Tool, das Krankenhäusern dabei hilft, ihre Hitzetoleranz zu bewerten und zu verbessern. Esermöglicht die strukturierte Bewertung der Hitzeresilienz von Krankenhäusern und liefert direkt umsetzbare Optimierungsmaßnahmen.
+  Das Hospital Heat Resilience Assessment (HHRA) ist ein webbasiertes Tool, das Krankenhäusern dabei hilft, ihre Hitzetoleranz zu bewerten und zu verbessern. Es ermöglicht die strukturierte Bewertung der Hitzeresilienz von Krankenhäusern und liefert direkt umsetzbare Optimierungsmaßnahmen.
 </p>
 
           <div className="space-y-3 text-sm text-slate-600">
