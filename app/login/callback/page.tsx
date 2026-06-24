@@ -8,20 +8,31 @@ export default function AuthCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    const handleCallback = async () => {
+    let isClosed = false;
+
+    const handleSession = async () => {
       const {
         data: { session },
-        error,
       } = await supabase.auth.getSession();
 
-      if (session && !error) {
+      if (session?.user && !isClosed) {
         router.replace('/assessment');
-      } else {
-        router.replace('/login');
       }
     };
 
-    handleCallback();
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user && !isClosed) {
+        router.replace('/assessment');
+      }
+    });
+
+    const subscription = data?.subscription;
+    handleSession();
+
+    return () => {
+      isClosed = true;
+      subscription?.unsubscribe();
+    };
   }, [router]);
 
   return <p className="min-h-screen flex items-center justify-center text-slate-700">Logging you in…</p>;
