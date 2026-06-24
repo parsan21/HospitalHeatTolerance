@@ -143,7 +143,7 @@ export function AssessmentApp() {
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Hitzeresilienz</p>
             <h1 className="text-3xl font-semibold text-slate-950">Bewertung für Krankenhäuser</h1>
-            <p className="mt-2 max-w-2xl text-slate-600">Beantworte die Fragen für jede Kategorie. Deine zuletzt gespeicherten Antworten werden automatisch geladen.</p>
+            <p className="mt-2 max-w-2xl text-slate-600">Beantworten Sie die Fragen für jede Kategorie. Ihre zuletzt gespeicherten Antworten werden automatisch geladen.</p>
           </div>
           <div className="rounded-3xl bg-slate-50 px-4 py-3 text-sm text-slate-700 shadow-inner">
             Fortschritt: <span className="font-semibold">{progress}%</span>
