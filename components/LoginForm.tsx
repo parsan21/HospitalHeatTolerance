@@ -31,7 +31,7 @@ export default function LoginForm() {
         <h1 className="text-3xl font-semibold text-slate-900">Login</h1>
 
         <p className="mt-3 text-slate-600">
-          Melden Sie sich mit Ihrer E-Mail an, um die Daten Ihres Krankenhauses bezüglich der Hitzetoleranz einzusehen.
+          Melden Sie sich mit Ihrer E-Mail an, um am Assessment teilzunehmen und Daten Ihres Krankenhauses bezüglich der Hitzetoleranz einzusehen.
         </p>
 
         <div className="mt-8 flex flex-col gap-4">
