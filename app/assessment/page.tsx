@@ -5,12 +5,13 @@ import { AssessmentApp } from '@/components/AssessmentApp';
 export const dynamic = 'force-dynamic';
 
 export default async function AssessmentPage() {
-  const supabaseServer = createSupabaseServer();
-  const {
-    data: { session },
-  } = await supabaseServer.auth.getSession();
+  const supabase = createSupabaseServer();
 
-  if (!session?.user) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
     redirect('/login');
   }
 

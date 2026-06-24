@@ -9,6 +9,7 @@ export default function AuthCallback() {
 
   useEffect(() => {
     let isClosed = false;
+    let timeoutId: number | undefined;
 
     const handleSession = async () => {
       const {
@@ -16,21 +17,30 @@ export default function AuthCallback() {
       } = await supabase.auth.getSession();
 
       if (session?.user && !isClosed) {
+        window.clearTimeout(timeoutId);
         router.replace('/assessment');
       }
     };
 
     const { data } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user && !isClosed) {
+        window.clearTimeout(timeoutId);
         router.replace('/assessment');
       }
     });
+
+    timeoutId = window.setTimeout(() => {
+      if (!isClosed) {
+        router.replace('/login');
+      }
+    }, 5000);
 
     const subscription = data?.subscription;
     handleSession();
 
     return () => {
       isClosed = true;
+      window.clearTimeout(timeoutId);
       subscription?.unsubscribe();
     };
   }, [router]);
