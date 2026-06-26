@@ -26,16 +26,44 @@ export function QuestionStep({ questions, answers, onAnswerChange }: QuestionSte
 
       <div className="grid gap-6">
         {questions.map((question) => {
-          const answer = answers.find((item) => item.questionId === question.id);
-          const selected = answer?.value ?? 0;
+        const answer = answers.find((item) => item.questionId === question.id);
+        const selected = answer?.value ?? 0;
+        const qType = (question as Question).type ?? 'scale';
 
-          return (
-            <div key={question.id} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-              <div className="flex flex-col gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900">{question.text}</h3>
-                  <p className="mt-1 text-sm text-slate-500">Gewichtung: {question.weight}</p>
+        return (
+          <div key={question.id} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+            <div className="flex flex-col gap-4">
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900">{question.text}</h3>
+                <p className="mt-1 text-sm text-slate-500">Gewichtung: {question.weight}</p>
+              </div>
+
+              {qType === 'boolean' ? (
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition ${
+                      selected === 1
+                        ? 'border-slate-950 bg-slate-950 text-white'
+                        : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'
+                    }`}
+                    onClick={() => onAnswerChange(question.id, 1)}
+                  >
+                    Ja
+                  </button>
+                  <button
+                    type="button"
+                    className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition ${
+                      selected === 0
+                        ? 'border-slate-950 bg-slate-950 text-white'
+                        : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'
+                    }`}
+                    onClick={() => onAnswerChange(question.id, 0)}
+                  >
+                    Nein
+                  </button>
                 </div>
+              ) : (
                 <div className="flex flex-wrap items-center gap-2 sm:grid sm:grid-cols-5">
                   {scoreValues.map((value) => (
                     <button
@@ -52,10 +80,11 @@ export function QuestionStep({ questions, answers, onAnswerChange }: QuestionSte
                     </button>
                   ))}
                 </div>
-              </div>
+              )}
             </div>
-          );
-        })}
+          </div>
+        );
+      })}
       </div>
     </div>
   );

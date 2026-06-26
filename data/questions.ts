@@ -63,6 +63,7 @@ export const questions: Question[] = [
     category: 'building',
     text: 'Gibt es ein Konzept für den Ausfall kritischer technischer Systeme bei Hitze?',
     weight: 4,
+    type: 'boolean'
   },
     {
     id: 'building-6',
@@ -99,6 +100,7 @@ export const questions: Question[] = [
     category: 'governance',
     text: 'Gibt es eine klar benannte Person oder Stelle, die für Hitzeschutz verantwortlich ist? ',
     weight: 5,
+    type: 'boolean'
   },
   {
     id: 'governance-2',
@@ -111,6 +113,7 @@ export const questions: Question[] = [
     category: 'governance',
     text: 'Existiert ein formaler Hitzeschutz- oder Hitzereaktionsplan? ',
     weight: 5,
+    type: 'boolean'
   },
   {
     id: 'governance-4',
@@ -183,6 +186,7 @@ export const questions: Question[] = [
     category: 'staff',
     text: 'Gibt es ein Notfallkonzept für Intensiv- oder IMC-Bereiche bei Ausfall von Kühl- oder Überwachungssystemen?',
     weight: 4,
+    type: 'boolean'
   },
    {
     id: 'staff-8',

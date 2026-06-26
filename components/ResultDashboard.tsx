@@ -43,12 +43,14 @@ export function ResultDashboard({
     const detailAnswers = detailQuestions.map((question) => {
       const answer = answers.find((item) => item.questionId === question.id);
       const value = answer?.value ?? 0;
+      const qType = (question as Question).type ?? 'scale';
 
       return {
         text: question.text,
         value,
         weight: question.weight,
         weighted: value * question.weight,
+        type: qType,
       };
     });
 
@@ -56,8 +58,8 @@ export function ResultDashboard({
       score: score?.normalizedScore ?? 0,
       label: categories[selectedCategory],
       questions: detailAnswers,
-      strengths: detailAnswers.filter((item) => item.value >= 4),
-      weaknesses: detailAnswers.filter((item) => item.value <= 2),
+      strengths: detailAnswers.filter((item) => (item.type === 'boolean' ? item.value === 1 : item.value >= 4)),
+      weaknesses: detailAnswers.filter((item) => (item.type === 'boolean' ? item.value === 0 : item.value <= 2)),
     };
   }, [answers, assessment.categoryScores, questions, selectedCategory]);
 

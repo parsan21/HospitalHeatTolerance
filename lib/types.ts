@@ -5,6 +5,16 @@ export interface Question {
   category: CategoryKey;
   text: string;
   weight: number;
+  /**
+   * Type of the question. Defaults to 'scale' when omitted.
+   * - 'scale' = numerical scale 0..4
+   * - 'boolean' = yes/no stored as 1/0
+   */
+  type?: 'scale' | 'boolean';
+  /**
+   * Optional: whether the question is required
+   */
+  required?: boolean;
 }
 
 export interface Answer {
