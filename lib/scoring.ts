@@ -24,7 +24,7 @@ const categoryTotals: Record<CategoryKey, CategoryTotals> =
     const answer = answers.find((item) => item.questionId === question.id);
     const value = answer?.value ?? 0;
     const weightedScore = value * question.weight;
-    const maxWeighted = 5 * question.weight;
+    const maxWeighted = 4 * question.weight;
 
     categoryTotals[question.category].totalWeight += question.weight;
     categoryTotals[question.category].rawScore += weightedScore;

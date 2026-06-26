@@ -171,7 +171,7 @@ export function AssessmentApp() {
 
         <div className="mt-8 border-b border-slate-200 pb-6">
           <h2 className="text-xl font-semibold text-slate-900">Kategorie: {categories[currentCategory]}</h2>
-          <p className="mt-2 text-slate-600">Bewerte jede Frage auf der Skala von 0 bis 5.</p>
+          <p className="mt-2 text-slate-600">Bewerte jede Frage auf der Skala von 0 bis 4.</p>
         </div>
 
         <QuestionStep questions={categoryQuestions} answers={answers} onAnswerChange={handleAnswerChange} />
