@@ -108,7 +108,7 @@ export function ResultDashboard({
                   <h4 className="text-lg font-semibold text-slate-900">{categories[score.category]}</h4>
                   <p className="mt-1 text-sm text-slate-500">Score: {score.normalizedScore} %</p>
                 </div>
-                <div className="rounded-2xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white">{score.rawScore} / {score.maxScore}</div>
+                <div className="whitespace-nowraprounded-2xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white">{score.rawScore} / {score.maxScore}</div>
               </div>
             </button>
           ))}
