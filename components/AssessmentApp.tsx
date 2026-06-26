@@ -10,7 +10,7 @@ import { recommendations } from '@/data/recommendations';
 import { QuestionStep } from './QuestionStep';
 import { ResultDashboard } from './ResultDashboard';
 
-const categoryOrder: CategoryKey[] = ['climate', 'building', 'governance', 'staff', 'care'];
+const categoryOrder: CategoryKey[] = ['climate', 'building', 'governance', 'staff'];
 
 export function AssessmentApp() {
   const [answers, setAnswers] = useState<Answer[]>(() => buildEmptyAnswers(questions));

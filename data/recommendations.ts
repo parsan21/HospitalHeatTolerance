@@ -84,26 +84,5 @@ export const recommendations: Recommendation[] = [
     description: 'Setzen Sie auf fortgeschrittene Schulungen und ergonomische Arbeitsbedingungen.',
     minScore: 70,
     maxScore: 100,
-  },
-  {
-    category: 'care',
-    title: 'Versorgungsrisiken senken',
-    description: 'Verbessern Sie Prozesse für hitzebedingte Patientenversorgung und Materialverfügbarkeit.',
-    minScore: 0,
-    maxScore: 39,
-  },
-  {
-    category: 'care',
-    title: 'Versorgung stabilisieren',
-    description: 'Führen Sie Simulationen durch und optimieren Sie patientenbezogene Abläufe.',
-    minScore: 40,
-    maxScore: 69,
-  },
-  {
-    category: 'care',
-    title: 'Pflege und Versorgung optimieren',
-    description: 'Nutzen Sie datenbasierte Standards zur Stärkung der Patientenbetreuung.',
-    minScore: 70,
-    maxScore: 100,
-  },
+  }
 ];

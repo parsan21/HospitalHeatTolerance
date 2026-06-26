@@ -1,4 +1,4 @@
-export type CategoryKey = 'climate' | 'building' | 'governance' | 'staff' | 'care';
+export type CategoryKey = 'climate' | 'building' | 'governance' | 'staff';
 
 export interface Question {
   id: string;
