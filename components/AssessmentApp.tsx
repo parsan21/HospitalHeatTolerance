@@ -229,13 +229,23 @@ export function AssessmentApp() {
             >
               {activeStep === categoryOrder.length - 1 ? 'Ergebnis anzeigen' : 'Nächste Kategorie'}
             </button>
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-              onClick={handleJumpToStart}
-            >
-              Zum Anfang
-            </button>
+            {activeStep > 0 ? (
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                onClick={handleJumpToStart}
+              >
+                Zum Anfang
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-400"
+                disabled
+              >
+                Zum Anfang
+              </button>
+            )}
           </div>
           <div className="flex flex-wrap justify-end gap-3">
             <button
