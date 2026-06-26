@@ -145,7 +145,9 @@ export function ResultDashboard({
                   <div key={item.text} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-sm text-slate-700">{item.text}</p>
-                      <span className="rounded-full bg-slate-950 px-3 py-1 text-sm font-semibold text-white">{item.value} × {item.weight}</span>
+                      <span className="shrink-0 whitespace-nowrap rounded-full bg-slate-950 px-5 py-2 text-sm font-semibold text-white">
+                        {item.value} × {item.weight}
+                      </span>
                     </div>
                     <p className="mt-2 text-sm text-slate-500">Gewichtete Punkte: {item.weighted}</p>
                   </div>
