@@ -49,6 +49,7 @@ export interface StoredAssessment {
   user_id: string;
   score: number;
   answers: Answer[];
+  progress?: number;
   created_at: string;
   updated_at: string;
 }

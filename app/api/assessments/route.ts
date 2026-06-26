@@ -16,7 +16,7 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from('assessments')
-    .select('id, score, answers, created_at, updated_at')
+    .select('id, score, answers, progress, created_at, updated_at')
     .eq('user_id', session.user.id)
     .order('updated_at', { ascending: false })
     .maybeSingle();
@@ -47,6 +47,8 @@ export async function POST(request: NextRequest) {
   }
 
   const assessmentResult = calculateAssessment(questions, answers);
+  const progress = typeof payload.progress === 'number' ? payload.progress : 0;
+
   const { data, error } = await supabase
     .from('assessments')
     .upsert(
@@ -55,6 +57,7 @@ export async function POST(request: NextRequest) {
           user_id: session.user.id,
           score: assessmentResult.normalizedTotal,
           answers,
+          progress,
         },
       ],
       {

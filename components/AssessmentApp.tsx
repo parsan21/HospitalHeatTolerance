@@ -49,13 +49,17 @@ export function AssessmentApp() {
         setSavedAssessment(assessmentData);
       }
 
+      if (assessmentData?.progress != null) {
+        setActiveStep(assessmentData.progress);
+      }
+
       setIsLoading(false);
     }
 
     loadAssessment();
   }, [router]);
 
-  async function handleSave() {
+  async function saveAssessment(): Promise<boolean> {
     setSaveMessage('Speichere Assessment...');
 
     const response = await fetch('/api/assessments', {
@@ -63,18 +67,23 @@ export function AssessmentApp() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ answers }),
+      body: JSON.stringify({ answers, progress: activeStep }),
     });
 
     const json = await response.json();
 
     if (!response.ok) {
       setSaveMessage(`Fehler: ${json.error ?? 'Speichern fehlgeschlagen'}`);
-      return;
+      return false;
     }
 
     setSavedAssessment(json.assessment);
     setSaveMessage('Ihre Antworten wurden gespeichert.');
+    return true;
+  }
+
+  async function handleSave() {
+    await saveAssessment();
   }
 
   function handleAnswerChange(questionId: string, value: number) {
@@ -95,8 +104,26 @@ export function AssessmentApp() {
 
   async function handleLogout() {
     setIsSigningOut(true);
-    await supabase.auth.signOut();
+    const saved = await saveAssessment();
+
+    if (!saved) {
+      setIsSigningOut(false);
+      return;
+    }
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      setIsSigningOut(false);
+      setSaveMessage(`Logout fehlgeschlagen: ${error.message}`);
+      return;
+    }
+
     router.push('/login');
+  }
+
+  function handleJumpToStart() {
+    setActiveStep(0);
+    setSelectedCategory(null);
   }
 
   function handleReset() {
@@ -144,10 +171,10 @@ export function AssessmentApp() {
           </button>
           <button
             type="button"
-            onClick={() => router.refresh()}
+            onClick={handleJumpToStart}
             className="rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
           >
-            Seite neu laden
+            Zum Anfang
           </button>
         </div>
         {saveMessage ? <p className="mt-4 text-sm text-slate-600">{saveMessage}</p> : null}
@@ -176,32 +203,59 @@ export function AssessmentApp() {
 
         <QuestionStep questions={categoryQuestions} answers={answers} onAnswerChange={handleAnswerChange} />
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          {activeStep > 0 ? (
+        <div className="mt-8 grid gap-3 sm:grid-cols-[1fr_auto]">
+          <div className="flex flex-wrap gap-3">
+            {activeStep > 0 ? (
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                onClick={handleBack}
+              >
+                Zurück
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-400"
+                disabled
+              >
+                Zurück
+              </button>
+            )}
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800"
+              onClick={handleNext}
+            >
+              {activeStep === categoryOrder.length - 1 ? 'Ergebnis anzeigen' : 'Nächste Kategorie'}
+            </button>
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-              onClick={handleBack}
+              onClick={handleJumpToStart}
             >
-              Zurück
+              Zum Anfang
             </button>
-          ) : (
+          </div>
+          <div className="flex flex-wrap justify-end gap-3">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-400"
-              disabled
+              onClick={handleSave}
+              className="inline-flex items-center justify-center rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
             >
-              Zurück
+              Speichern
             </button>
-          )}
-          <button
-            type="button"
-            className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800"
-            onClick={handleNext}
-          >
-            {activeStep === categoryOrder.length - 1 ? 'Ergebnis anzeigen' : 'Nächste Kategorie'}
-          </button>
+            <button
+              type="button"
+              onClick={handleLogout}
+              disabled={isSigningOut}
+              className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isSigningOut ? 'Logout...' : 'Logout'}
+            </button>
+          </div>
         </div>
+        {saveMessage ? <p className="mt-4 text-sm text-slate-600">{saveMessage}</p> : null}
       </section>
     </main>
   );

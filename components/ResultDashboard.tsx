@@ -67,7 +67,7 @@ export function ResultDashboard({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Ergebnisübersicht</p>
-            <h2 className="text-3xl font-semibold text-slate-950">Gesamtscore: {assessment.normalizedTotal} / 100</h2>
+            <h2 className="text-3xl font-semibold text-slate-950">Gesamtscore: {assessment.normalizedTotal} %</h2>
             <p className="mt-2 max-w-2xl text-slate-600">Ihr Krankenhaus befindet sich in einer strukturierten Bewertung der Hitzetoleranz.</p>
           </div>
           <button
@@ -107,7 +107,7 @@ export function ResultDashboard({
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900">{categories[score.category]}</h4>
-                  <p className="mt-1 text-sm text-slate-500">Score: {score.normalizedScore} / 100</p>
+                  <p className="mt-1 text-sm text-slate-500">Score: {score.normalizedScore} %</p>
                 </div>
                 <div className="rounded-2xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white">{score.rawScore} / {score.maxScore}</div>
               </div>
@@ -122,7 +122,7 @@ export function ResultDashboard({
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Kategorie-Detail</p>
               <h3 className="text-2xl font-semibold text-slate-950">{categoryDetail.label}</h3>
-              <p className="mt-2 text-slate-600">Kategoriescore: {categoryDetail.score} / 100</p>
+              <p className="mt-2 text-slate-600">Kategoriescore: {categoryDetail.score} %</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-3xl bg-slate-50 p-5">
