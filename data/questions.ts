@@ -1,10 +1,10 @@
 import type { Question } from '@/lib/types';
 
 export const categories = {
-  climate: 'Klima und übergeordnete Fragen für den Klimaschutzbeauftragten',
+  climate: 'Klima & übergeordnete Fragen für den Klimaschutzbeauftragten',
   building: 'Gebäude & Technik',
   governance: 'Governance & Kommunikation',
-  staff: 'Personal, Versorgung und Patienten',
+  staff: 'Personal, Versorgung & Patienten',
 } as const;
 
 export type CategoryKey = keyof typeof categories;

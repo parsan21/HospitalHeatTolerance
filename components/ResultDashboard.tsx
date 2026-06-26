@@ -68,8 +68,7 @@ export function ResultDashboard({
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Ergebnisübersicht</p>
             <h2 className="text-3xl font-semibold text-slate-950">Gesamtscore: {assessment.normalizedTotal} %</h2>
-            <p className="mt-2 max-w-2xl text-slate-600">Ihr Krankenhaus befindet sich in einer strukturierten Bewertung der Hitzetoleranz.</p>
-          </div>
+            </div>
           <button
             type="button"
             onClick={onReset}
