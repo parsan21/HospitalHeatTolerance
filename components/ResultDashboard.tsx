@@ -144,8 +144,9 @@ export function ResultDashboard({
                 {categoryDetail.questions.map((item) => (
                   <div key={item.text} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-sm text-slate-700">{item.text}</p>
-                      <span className="shrink-0 whitespace-nowrap rounded-full bg-slate-950 px-5 py-2 text-sm font-semibold text-white">
+                      <p className="min-w-0 flex-1 text-sm text-slate-700">{item.text}</p>
+
+                      <span className="flex-none whitespace-nowrap rounded-full bg-slate-950 px-5 py-2 text-sm font-semibold text-white">
                         {item.value} × {item.weight}
                       </span>
                     </div>
