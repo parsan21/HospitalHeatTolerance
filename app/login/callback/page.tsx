@@ -45,5 +45,5 @@ export default function AuthCallback() {
     };
   }, [router]);
 
-  return <p className="min-h-screen flex items-center justify-center text-slate-700">Logging you in…</p>;
+  return <p className="min-h-screen flex items-center justify-center text-slate-700">Anmeldung wird überprüft...</p>;
 }
