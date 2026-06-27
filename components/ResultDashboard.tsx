@@ -45,11 +45,16 @@ export function ResultDashboard({
       const value = answer?.value ?? 0;
       const qType = (question as Question).type ?? 'scale';
 
+      const displayValue =
+        qType === 'boolean'
+          ? (value === 4 ? 4 : 0)
+          : value;
+
       return {
         text: question.text,
-        value,
+        value: displayValue,
         weight: question.weight,
-        weighted: value * question.weight,
+        weighted: displayValue * question.weight,
         type: qType,
       };
     });
