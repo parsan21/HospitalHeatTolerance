@@ -8,7 +8,7 @@ export interface Question {
   /**
    * Type of the question. Defaults to 'scale' when omitted.
    * - 'scale' = numerical scale 0..4
-   * - 'boolean' = yes/no stored as 1/0
+   * - 'boolean' = yes/no stored as 4/0
    */
   type?: 'scale' | 'boolean';
   /**

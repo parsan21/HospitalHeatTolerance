@@ -58,7 +58,7 @@ export function ResultDashboard({
       score: score?.normalizedScore ?? 0,
       label: categories[selectedCategory],
       questions: detailAnswers,
-      strengths: detailAnswers.filter((item) => (item.type === 'boolean' ? item.value === 1 : item.value >= 4)),
+      strengths: detailAnswers.filter((item) => (item.type === 'boolean' ? item.value === 4 : item.value >= 4)),
       weaknesses: detailAnswers.filter((item) => (item.type === 'boolean' ? item.value === 0 : item.value <= 2)),
     };
   }, [answers, assessment.categoryScores, questions, selectedCategory]);
