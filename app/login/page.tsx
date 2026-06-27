@@ -36,6 +36,13 @@ export default function LoginPage() {
         </div>
 
       </div>
+      <footer className="mt-8 w-full">
+        <div className="max-w-6xl mx-auto px-4 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-6">
+          <div>Verantwortlich: <span className="font-medium text-slate-900">Max Mustermann</span></div>
+          <div>Musterstraße 1, 12345 Musterstadt</div>
+          <div className="mt-1">E-Mail: <a href="mailto:max@example.com" className="text-sky-600 hover:underline">max@example.com</a> · <a href="/impressum" className="text-sky-600 hover:underline">Vollständiges Impressum</a></div>
+        </div>
+      </footer>
     </main>
   );
 }
