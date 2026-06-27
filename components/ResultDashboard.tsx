@@ -47,7 +47,7 @@ export function ResultDashboard({
 
       const displayValue =
         qType === 'boolean'
-          ? (value === 4 ? 4 : 0)
+          ? (value === 1 ? 4 : 0)
           : value;
 
       return {
