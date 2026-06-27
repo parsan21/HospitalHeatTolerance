@@ -1,6 +1,19 @@
 import type { Answer, AssessmentResult, CategoryScore, Question, CategoryKey, Recommendation } from './types';
 import { categories } from '@/data/questions';
 
+export function calculateDisplayValue(question: Question, value: number): number {
+  if (question.type === 'boolean') {
+    return value === 1 ? 4 : 0;
+  }
+
+  return value;
+}
+
+export function calculateQuestionScore(question: Question, value: number): number {
+  const displayValue = calculateDisplayValue(question, value);
+  return displayValue * question.weight;
+}
+
 export function buildEmptyAnswers(questions: Question[]): Answer[] {
   return questions.map((question) => ({ questionId: question.id, value: 0 }));
 }
@@ -23,10 +36,7 @@ export function calculateAssessment(questions: Question[], answers: Answer[]): A
   questions.forEach((question) => {
     const answer = answers.find((item) => item.questionId === question.id);
     const value = answer?.value ?? 0;
-    const weightedScore =
-      question.type === 'boolean'
-        ? (value === 1 ? 4 : 0) * question.weight
-        : value * question.weight;
+    const weightedScore = calculateQuestionScore(question, value);
     const maxWeighted = 4 * question.weight;
 
     categoryTotals[question.category].totalWeight += question.weight;

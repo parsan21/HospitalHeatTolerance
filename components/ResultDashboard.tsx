@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 import type { Answer, AssessmentResult, CategoryKey, Question, Recommendation } from '@/lib/types';
 import { categories } from '@/data/questions';
+import { calculateDisplayValue, calculateQuestionScore } from '@/lib/scoring';
 
 interface ResultDashboardProps {
   assessment: AssessmentResult;
@@ -43,18 +44,14 @@ export function ResultDashboard({
     const detailAnswers = detailQuestions.map((question) => {
       const answer = answers.find((item) => item.questionId === question.id);
       const value = answer?.value ?? 0;
-      const qType = (question as Question).type ?? 'scale';
-
-      const displayValue =
-        qType === 'boolean'
-          ? (value === 1 ? 4 : 0)
-          : value;
+      const qType = question.type ?? 'scale';
+      const displayValue = calculateDisplayValue(question, value);
 
       return {
         text: question.text,
         value: displayValue,
         weight: question.weight,
-        weighted: displayValue * question.weight,
+        weighted: calculateQuestionScore(question, value),
         type: qType,
       };
     });

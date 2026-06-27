@@ -22,7 +22,7 @@ export default function LoginForm() {
       return;
     }
 
-    setMessage('Login-Link gesendet. Bitte prüfe deine E-Mails.');
+    setMessage('Login-Link gesendet. Bitte prüfen Sie Ihre E-Mails.');
   };
 
   return (
