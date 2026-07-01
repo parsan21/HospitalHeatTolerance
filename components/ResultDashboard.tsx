@@ -170,7 +170,7 @@ export function ResultDashboard({
                     </div>
                   ))
                 ) : (
-                  <div className="rounded-3xl bg-slate-50 p-5 text-slate-600">Für diese Kategorie sind keine spezifischen Maßnahmen vorhanden.</div>
+                  <div className="rounded-3xl bg-slate-50 p-5 text-slate-600">Für diese Kategorie sind keine spezifischen Maßnahmen vorhanden, da Sie in diesem Bereich bereits gute Ergebnisse erzielt haben.</div>
                 )}
               </div>
             </div>
