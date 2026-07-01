@@ -132,6 +132,7 @@ export const questions: Question[] = [
     category: 'governance',
     text: 'Gibt es eine festgelegte interne Eskalations- und Kommunikationskette für den Eintritt eines Hitzeereignisse? ',
     weight: 5,
+    type: 'boolean',
   },
   {
     id: 'governance-7',
