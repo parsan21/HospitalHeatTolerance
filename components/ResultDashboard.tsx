@@ -153,8 +153,7 @@ export function ResultDashboard({
                         {item.value}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm text-slate-500">Gewichtete Punkte: {item.weighted}</p>
-                  </div>
+                    </div>
                 ))}
               </div>
             </div>
