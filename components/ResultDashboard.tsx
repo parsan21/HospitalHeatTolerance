@@ -164,8 +164,8 @@ export function ResultDashboard({
                 {recommendations.length > 0 ? (
                   recommendations.map((recommendation) => (
                     <div key={recommendation.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-                      <h5 className="font-semibold text-slate-950">{recommendation.title}</h5>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">{recommendation.description}</p>
+                      <h5 className="font-semibold text-slate-950">{recommendation.description}</h5>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{recommendation.title}</p>
                     </div>
                   ))
                 ) : (
