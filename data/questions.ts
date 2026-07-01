@@ -9,123 +9,142 @@ export const categories = {
 
 export type CategoryKey = keyof typeof categories;
 
-export const questions: Question[] = [
+const rawQuestions: Question[] = [
   {
     id: 'climate-1',
     category: 'climate',
     text: 'Wird die Hitzeresilienz der Einrichtung regelmäßig anhand definierter Kennzahlen, Scores oder Audits bewertet?',
     weight: 5,
+    measureDescription: 'Definieren Sie regelmäßige Kennzahlen und führen Sie strukturierte Audits zur Hitzeresilienz durch.',
   },
   {
     id: 'climate-2',
     category: 'climate',
     text: 'Ist Hitzeschutz verbindlich in Strategie, Risikomanagement, Qualitätsmanagement oder Krankenhausleitung verankert?',
     weight: 4,
+    measureDescription: 'Binden Sie Hitzeschutz verbindlich in Strategie, Leitlinien und Verantwortlichkeiten ein.',
   },
   {
     id: 'climate-3',
     category: 'climate',
     text: 'Werden Erfahrungen, Störungen und Beschwerden aus Hitzeereignissen dokumentiert und für Verbesserungen genutzt?',
     weight: 3,
+    measureDescription: 'Dokumentieren Sie Ereignisse und nutzen Sie sie systematisch für Verbesserungen.',
   },
   {
     id: 'climate-4',
     category: 'climate',
     text: 'Werden Klimaprojektionen oder lokale Hitzedaten in Bau-, Sanierungs- und Betriebsplanung einbezogen?',
     weight: 4,
+    measureDescription: 'Nutzen Sie lokale Hitzedaten und Klimaprojektionen für Bau und Betrieb.',
   },
   {
     id: 'building-1',
     category: 'building',
     text: 'Ist eine ausreichende Kühlinfrastruktur in medizinisch kritischen Bereichen vorhanden? ',
     weight: 5,
+    measureDescription: 'Stärken Sie die Kühlung in Bereichen mit besonders hoher Versorgungs- und Patientensensitivität.',
   },
   {
     id: 'building-2',
     category: 'building',
     text: 'Wurden besonders hitzegefährdete Gebäude, Stationen und Funktionsbereiche systematisch identifiziert?',
     weight: 5,
+    measureDescription: 'Identifizieren Sie hitzegefährdete Bereiche und priorisieren Sie sie für Schutzmaßnahmen.',
   },
    {
     id: 'building-3',
     category: 'building',
     text: 'Werden Neubau- und Sanierungsvorhaben verbindlich auf Hitzeschutz geprüft?',
     weight: 5,
+    measureDescription: 'Führen Sie Hitzeschutzprüfungen verbindlich für alle Bau- und Sanierungsvorhaben ein.',
   },
    {
     id: 'building-4',
     category: 'building',
     text: 'Werden die Raumtemperaturen in Patientenzimmern und Arbeitsbereichen standardisiert überwacht?',
     weight: 3,
+    measureDescription: 'Installieren Sie eine standardisierte Temperaturüberwachung in relevanten Räumen.',
   },
    {
     id: 'building-5',
     category: 'building',
     text: 'Gibt es ein Konzept für den Ausfall kritischer technischer Systeme bei Hitze?',
     weight: 4,
-    type: 'boolean'
+    type: 'boolean',
+    measureDescription: 'Erarbeiten Sie ein klares Konzept für Ausfälle kritischer Systeme bei Hitzestress.',
   },
     {
     id: 'building-6',
     category: 'building',
     text: 'Ist der bauliche Zustand des Gebäudes auf Hitzeschutz ausgelegt? ',
     weight: 5,
+    measureDescription: 'Analysieren Sie den baulichen Zustand und schließen Sie Schutzlücken gezielt.',
   },
     {
     id: 'building-7',
     category: 'building',
     text: 'Sind IT-, Server- und medizintechnische Systeme gegen hitzebedingte Ausfälle abgesichert',
     weight: 4,
+    measureDescription: 'Sichern Sie IT- und medizinische Systeme mit Redundanzen und Schutzmaßnahmen ab.',
   },
     {
     id: 'building-8',
     category: 'building',
     text: 'Sind Kühlketten für Medikamente, Blutprodukte und temperaturempfindliche Materialien auch während Transport und Zwischenlagerung gesichert?',
     weight: 5,
+    measureDescription: 'Stellen Sie sicher, dass Kühlketten auch außerhalb der Klinik zuverlässig funktionieren.',
   },
     {
     id: 'building-9',
     category: 'building',
     text: 'Gibt es festgelegte Sofortmaßnahmen bei Hitzeereignissen, z.B. Verschattung, Nachtlüftung, mobile Kühlung oder Anpassung von Abläufen? ',
     weight: 4,
+    measureDescription: 'Definieren Sie klare Reaktionsschritte wie Verschattung, Lüftung und mobile Kühlung.',
   },
     {
     id: 'building-10',
     category: 'building',
     text: 'Werden Außenflächen, Innenhöfe oder versiegelte Bereiche bei der Hitzebelastung des Krankenhausstandorts berücksichtigt?',
     weight: 5,
+    measureDescription: 'Berücksichtigen Sie Freiflächen und versiegelte Bereiche bei der Standortanalyse.',
   },
   {
     id: 'governance-1',
     category: 'governance',
     text: 'Gibt es eine klar benannte Person oder Stelle, die für Hitzeschutz verantwortlich ist? ',
     weight: 5,
-    type: 'boolean'
+    type: 'boolean',
+    measureDescription: 'Weisen Sie eine klare Zuständigkeit für Hitzeschutz und Notfallkoordination zu.',
   },
   {
     id: 'governance-2',
     category: 'governance',
     text: 'Existieren strukturierte Entscheidungsprozesse für Hitzeschutzmaßnahmen?',
     weight: 3,
+    measureDescription: 'Formalisieren Sie Entscheidungsprozesse und Freigabeschritte für Schutzmaßnahmen.',
   },
   {
     id: 'governance-3',
     category: 'governance',
     text: 'Existiert ein formaler Hitzeschutz- oder Hitzereaktionsplan? ',
     weight: 5,
-    type: 'boolean'
+    type: 'boolean',
+    measureDescription: 'Erstellen Sie einen verbindlichen Plan für Hitzereaktionen und Eskalation.',
   },
   {
     id: 'governance-4',
     category: 'governance',
     text: 'Gibt es eine geregelte Finanzierungs- oder Priorisierungslogik für Hitzeschutzmaßnahmen?',
     weight: 5,
+    measureDescription: 'Definieren Sie eine transparente Priorisierung und Finanzierungslogik.',
   },
   {
     id: 'governance-5',
     category: 'governance',
     text: 'Existiert ein fest definierter Prozess, über den externe Hitzewarnungen empfangen und intern weitergeleitet werden?',
     weight: 5,
+    measureDescription: 'Richten Sie einen definierten Prozess für externe Warnungen und interne Weiterleitung ein.',
   },
   {
     id: 'governance-6',
@@ -133,85 +152,99 @@ export const questions: Question[] = [
     text: 'Gibt es eine festgelegte interne Eskalations- und Kommunikationskette für den Eintritt eines Hitzeereignisse? ',
     weight: 5,
     type: 'boolean',
+    measureDescription: 'Schaffen Sie eine klare Eskalations- und Kommunikationskette für Notfälle.',
   },
   {
     id: 'governance-7',
     category: 'governance',
     text: 'Werden hitze- oder klimabezogene Daten regelmäßig erfasst und ausgewertet?',
     weight: 4,
+    measureDescription: 'Erheben Sie regelmäßig hitze- und klimabezogene Daten und analysieren Sie sie.',
   },
   {
     id: 'governance-8',
     category: 'governance',
     text: 'Gibts es einen niedrigschwelligen Meldeweg für hitzebedingte Belastungen, Beschwerden oder Beinahe-Ereignisse des Personals',
     weight: 4,
+    measureDescription: 'Bauen Sie einen einfachen und vertraulichen Meldeweg für Belastungen und Vorfälle auf.',
   },
   {
     id: 'staff-1',
     category: 'staff',
     text: 'Gibt es Maßnahmen zum Schutz des Personals vor Hitzebelastung am Arbeitsplatz? ',
     weight: 5,
+    measureDescription: 'Schaffen Sie praktische Schutzmaßnahmen gegen Hitzebelastung am Arbeitsplatz.',
   },
   {
     id: 'staff-2',
     category: 'staff',
     text: 'Werden Arbeitsorganisation, Pausenregelungen oder Personalbelastung bei Hitzeereignissen berücksichtigt?',
     weight: 3,
+    measureDescription: 'Passen Sie Arbeitsabläufe, Pausen und Belastung bei Hitzeereignissen an.',
   },
   {
     id: 'staff-3',
     category: 'staff',
     text: 'Wird das Personal regelmäßig auf hitzebedingte Gesundheitsrisiken und Schutzmaßnahmen vorbereitet? ',
     weight: 3,
+    measureDescription: 'Bieten Sie regelmäßige Schulungen zu Gesundheitsrisiken und Schutzmaßnahmen an.',
   },
    {
     id: 'staff-4',
     category: 'staff',
     text: 'Wird die Versorgungsqualität unter Hitzestress standardisiert beobachtet?',
     weight: 3,
+    measureDescription: 'Beobachten Sie die Versorgungsqualität systematisch unter Hitzestress.',
   },
    {
     id: 'staff-5',
     category: 'staff',
     text: 'Existiert ein strukturiertes Flüssigkeitsmanagement bei Hitzeereignisse?',
     weight: 4,
+    measureDescription: 'Erstellen Sie ein strukturiertes Konzept für Flüssigkeitsversorgung und Hydration.',
   },
    {
     id: 'staff-6',
     category: 'staff',
     text: 'Werden hitzesensible Medikamente bei Risikopatient: innen im Rahmen von Hitzewarnungen überprüft?',
     weight: 3,
+    measureDescription: 'Prüfen Sie hitzesensitive Medikamente und Anpassungen bei Warnungen.',
   },
    {
     id: 'staff-7',
     category: 'staff',
     text: 'Gibt es ein Notfallkonzept für Intensiv- oder IMC-Bereiche bei Ausfall von Kühl- oder Überwachungssystemen?',
     weight: 4,
-    type: 'boolean'
+    type: 'boolean',
+    measureDescription: 'Pflegen Sie ein Notfallkonzept für kritische Bereiche bei technischen Ausfällen.',
   },
    {
     id: 'staff-8',
     category: 'staff',
     text: 'Existieren hitzeadaptierte Pflegestandards, und wird ihre Wirksamkeit für die Versorgungsqualität überprüft? ',
     weight: 4,
+    measureDescription: 'Entwickeln und prüfen Sie hitzeadaptierte Pflegestandards regelmäßig.',
   },
    {
     id: 'staff-9',
     category: 'staff',
     text: 'Werden ausreichende Mengen an Infusionslösungen und hitzerelevantem Material bei Hitzewarnungen vorgehalten? ',
     weight: 5,
+    measureDescription: 'Halten Sie ausreichend Material und Infusionslösungen für Hitzewarnungen vor.',
   },
    {
     id: 'staff-10',
     category: 'staff',
     text: 'Ist die Lagerung temperatursensibler Arzneimittel und Blutprodukte bei Hitze ausreichend gesichert? ',
     weight: 5,
+    measureDescription: 'Sichern Sie Lagerung und Überwachung temperatursensibler Arzneimittel und Blutprodukte.',
   },
    {
     id: 'staff-11',
     category: 'staff',
     text: 'Stehen ausreichend wirksame Kühlhilfsmittel für die direkte Patientenversorgung zur Verfügung?',
     weight: 4,
+    measureDescription: 'Stellen Sie wirksame Kühlhilfsmittel direkt für die Patientenversorgung bereit.',
   },
 
    {
@@ -219,11 +252,18 @@ export const questions: Question[] = [
     category: 'staff',
     text: 'Ist die Lagerung temperatursensibler Arzneimittel und Blutprodukte bei Hitze ausreichend gesichert? ',
     weight: 5,
+    measureDescription: 'Prüfen und verbessern Sie die Lagerungsbedingungen für empfindliche Materialien.',
   },
    {
     id: 'staff-13',
     category: 'staff',
     text: 'Ist eine ausreichende und leicht zugängliche Trinkwasserversorgung für Patienten flächendeckend sichergestellt?',
     weight: 4,
+    measureDescription: 'Stellen Sie eine ausreichende, leicht zugängliche Trinkwasserversorgung sicher.',
   }
 ];
+
+export const questions: Question[] = rawQuestions.map((question) => ({
+  ...question,
+  measureId: question.measureId ?? question.id,
+}));

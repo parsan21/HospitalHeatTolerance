@@ -35,7 +35,6 @@ export function QuestionStep({ questions, answers, onAnswerChange }: QuestionSte
             <div className="flex flex-col gap-4">
               <div>
                 <h3 className="text-lg font-semibold text-slate-900">{question.text}</h3>
-                <p className="mt-1 text-sm text-slate-500">Gewichtung: {question.weight}</p>
               </div>
 
               {qType === 'boolean' ? (

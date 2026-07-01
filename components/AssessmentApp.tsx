@@ -3,10 +3,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Answer, CategoryKey, StoredAssessment } from '@/lib/types';
-import { calculateAssessment, buildEmptyAnswers, getRecommendationsForCategory } from '@/lib/scoring';
+import { calculateAssessment, buildEmptyAnswers, getRecommendationsForCategory, normalizeAnswers, normalizeAnswer } from '@/lib/scoring';
 import { supabase } from '@/lib/supabaseClient';
 import { questions, categories } from '@/data/questions';
-import { recommendations } from '@/data/recommendations';
 import { QuestionStep } from './QuestionStep';
 import { ResultDashboard } from './ResultDashboard';
 
@@ -45,7 +44,7 @@ export function AssessmentApp() {
       const assessmentData: StoredAssessment | null = json.assessment;
 
       if (assessmentData?.answers) {
-        setAnswers(assessmentData.answers);
+        setAnswers(normalizeAnswers(questions, assessmentData.answers));
         setSavedAssessment(assessmentData);
       }
 
@@ -62,12 +61,14 @@ export function AssessmentApp() {
   async function saveAssessment(): Promise<boolean> {
     setSaveMessage('Speichere Assessment...');
 
+    const normalizedAnswers = normalizeAnswers(questions, answers);
+
     const response = await fetch('/api/assessments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ answers, progress: activeStep }),
+      body: JSON.stringify({ answers: normalizedAnswers, progress: activeStep }),
     });
 
     const json = await response.json();
@@ -87,7 +88,13 @@ export function AssessmentApp() {
   }
 
   function handleAnswerChange(questionId: string, value: number) {
-    setAnswers((prev) => prev.map((answer) => (answer.questionId === questionId ? { ...answer, value } : answer)));
+    const question = questions.find((item) => item.id === questionId);
+
+    if (!question) {
+      return;
+    }
+
+    setAnswers((prev) => prev.map((answer) => (answer.questionId === questionId ? normalizeAnswer(question, value, answer) : answer)));
   }
 
   function handleNext() {
@@ -157,7 +164,7 @@ export function AssessmentApp() {
           selectedCategory={selectedCategory}
           questions={questions}
           answers={answers}
-          recommendations={getRecommendationsForCategory(recommendations, selectedCategory ?? 'climate', selectedCategory ? assessment.categoryScores.find((item) => item.category === selectedCategory)?.normalizedScore ?? 0 : 0)}
+          recommendations={getRecommendationsForCategory(selectedCategory ?? 'climate', questions, answers)}
           onCategorySelect={handleCategorySelect}
           onReset={handleReset}
         />

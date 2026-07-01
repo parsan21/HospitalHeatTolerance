@@ -5,6 +5,8 @@ export interface Question {
   category: CategoryKey;
   text: string;
   weight: number;
+  measureDescription?: string;
+  measureId?: string;
   /**
    * Type of the question. Defaults to 'scale' when omitted.
    * - 'scale' = numerical scale 0..4
@@ -20,6 +22,10 @@ export interface Question {
 export interface Answer {
   questionId: string;
   value: number;
+  answer?: number;
+  scaleValue?: number;
+  weight?: number;
+  measureId?: string;
 }
 
 export interface CategoryScore {
@@ -44,6 +50,12 @@ export interface Recommendation {
   description: string;
   minScore: number;
   maxScore: number;
+  questionId?: string;
+  measureId?: string;
+  answer?: number;
+  scaleValue?: number;
+  weight?: number;
+  priorityScore?: number;
 }
 
 export interface Hospital {

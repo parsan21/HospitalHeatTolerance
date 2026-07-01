@@ -14,8 +14,30 @@ export function calculateQuestionScore(question: Question, value: number): numbe
   return displayValue * question.weight;
 }
 
+export function normalizeAnswer(question: Question, value: number | undefined, existingAnswer?: Partial<Answer>): Answer {
+  const normalizedValue = typeof value === 'number' ? value : existingAnswer?.value ?? existingAnswer?.answer ?? 0;
+  const safeValue = Number.isFinite(normalizedValue) ? normalizedValue : 0;
+  const scaleValue = question.type === 'boolean' ? (safeValue === 1 ? 4 : 0) : safeValue;
+
+  return {
+    questionId: question.id,
+    value: safeValue,
+    answer: safeValue,
+    scaleValue,
+    weight: question.weight,
+    measureId: question.measureId ?? question.id,
+  };
+}
+
 export function buildEmptyAnswers(questions: Question[]): Answer[] {
-  return questions.map((question) => ({ questionId: question.id, value: 0 }));
+  return questions.map((question) => normalizeAnswer(question, 0));
+}
+
+export function normalizeAnswers(questions: Question[], answers: Answer[]): Answer[] {
+  return questions.map((question) => {
+    const answer = answers.find((item) => item.questionId === question.id);
+    return normalizeAnswer(question, answer?.value ?? answer?.answer, answer);
+  });
 }
 
 export function calculateAssessment(questions: Question[], answers: Answer[]): AssessmentResult {
@@ -33,8 +55,10 @@ export function calculateAssessment(questions: Question[], answers: Answer[]): A
       ])
     ) as Record<CategoryKey, CategoryTotals>;
 
+  const normalizedAnswers = normalizeAnswers(questions, answers);
+
   questions.forEach((question) => {
-    const answer = answers.find((item) => item.questionId === question.id);
+    const answer = normalizedAnswers.find((item) => item.questionId === question.id);
     const value = answer?.value ?? 0;
     const weightedScore = calculateQuestionScore(question, value);
     const maxWeighted = 4 * question.weight;
@@ -69,10 +93,57 @@ export function calculateAssessment(questions: Question[], answers: Answer[]): A
   };
 }
 
-export function getRecommendationsForCategory(
-  recommendations: Recommendation[],
-  category: CategoryKey,
-  score: number
-) {
-  return recommendations.filter((item) => item.category === category && score >= item.minScore && score <= item.maxScore);
+export function buildMeasuresByCategory(questions: Question[], answers: Answer[] = []): Record<CategoryKey, Recommendation[]> {
+  const groupedMeasures = Object.keys(categories).reduce<Record<CategoryKey, Recommendation[]>>((accumulator, key) => {
+    accumulator[key as CategoryKey] = [];
+    return accumulator;
+  }, {} as Record<CategoryKey, Recommendation[]>);
+
+  const normalizedAnswers = normalizeAnswers(questions, answers);
+
+  questions.forEach((question) => {
+    const answer = normalizedAnswers.find((item) => item.questionId === question.id);
+    const answerValue = answer?.value ?? 0;
+    const scaleValue = answer?.scaleValue ?? 0;
+    const hasMeasure = Boolean(question.measureDescription || question.measureId);
+    const shouldInclude = question.type === 'boolean' ? answerValue === 0 : answerValue < 3;
+
+    if (!hasMeasure || !shouldInclude || answer == null) {
+      return;
+    }
+
+    const priorityScore = question.weight * 10 - answerValue;
+    const title = question.text;
+    const description = question.measureDescription ?? 'Bitte prüfen Sie die Maßnahme zu dieser Frage.';
+
+    groupedMeasures[question.category].push({
+      category: question.category,
+      title,
+      description,
+      minScore: 0,
+      maxScore: 100,
+      questionId: question.id,
+      measureId: question.measureId ?? question.id,
+      answer: answer.value,
+      scaleValue,
+      weight: question.weight,
+      priorityScore,
+    });
+  });
+
+  Object.values(groupedMeasures).forEach((items) => {
+    items.sort((left, right) => {
+      if ((right.priorityScore ?? 0) !== (left.priorityScore ?? 0)) {
+        return (right.priorityScore ?? 0) - (left.priorityScore ?? 0);
+      }
+
+      return left.title.localeCompare(right.title);
+    });
+  });
+
+  return groupedMeasures;
+}
+
+export function getRecommendationsForCategory(category: CategoryKey, questions: Question[] = [], answers: Answer[] = []) {
+  return buildMeasuresByCategory(questions, answers)[category] ?? [];
 }

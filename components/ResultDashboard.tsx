@@ -50,7 +50,6 @@ export function ResultDashboard({
       return {
         text: question.text,
         value: displayValue,
-        weight: question.weight,
         weighted: calculateQuestionScore(question, value),
         type: qType,
       };
@@ -151,7 +150,7 @@ export function ResultDashboard({
                       <p className="min-w-0 flex-1 text-sm text-slate-700">{item.text}</p>
 
                       <span className="flex-none whitespace-nowrap rounded-full bg-slate-950 px-5 py-2 text-sm font-semibold text-white">
-                        {item.value} × {item.weight}
+                        {item.value}
                       </span>
                     </div>
                     <p className="mt-2 text-sm text-slate-500">Gewichtete Punkte: {item.weighted}</p>
