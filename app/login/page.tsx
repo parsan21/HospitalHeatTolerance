@@ -48,16 +48,16 @@ export default function LoginPage() {
           <div>
             Verantwortlich:{' '}
             <span className="font-medium text-slate-900">
-              Max Mustermann
+              Azra Kutun
             </span>
           </div>
-          <div>Musterstraße 1, 12345 Musterstadt</div>
+          <div>KIT Campus Süd, 76131 Karlsruhe</div>
           <div className="mt-1">
             <a
               href="mailto:max@example.com"
               className="text-sky-600 hover:underline"
             >
-              max@example.com
+              ubuyn@student.kit.edu
             </a>
           </div>
         </div>
