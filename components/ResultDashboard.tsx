@@ -130,7 +130,7 @@ export function ResultDashboard({
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-3xl bg-slate-50 p-5">
-                <p className="text-sm text-slate-500">Schwächen</p>
+                <p className="text-sm text-slate-500">Schwächenz</p>
                 <p className="mt-2 text-lg font-semibold text-slate-900">{categoryDetail.weaknesses.length}</p>
               </div>
             </div>
