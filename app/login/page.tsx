@@ -60,12 +60,6 @@ export default function LoginPage() {
               max@example.com
             </a>
             {' • '}
-            <a
-              href="/impressum"
-              className="text-sky-600 hover:underline"
-            >
-              Vollständiges Impressum
-            </a>
           </div>
         </div>
       </footer>

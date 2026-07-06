@@ -10,7 +10,7 @@ export default function ImpressumPage() {
 
         <div className="text-sm text-slate-700 space-y-3">
           <div>
-            <strong>Verantwortlich:</strong> Max Mustermann
+            <strong>Verantwortliche:</strong> Max Mustermann
           </div>
 
           <div>
@@ -19,10 +19,6 @@ export default function ImpressumPage() {
 
           <div>
             <strong>E‑Mail:</strong> <a href="mailto:max@example.com" className="text-sky-600 hover:underline">max@example.com</a>
-          </div>
-
-          <div className="pt-4 text-slate-600">
-            Dies ist ein Platzhalter-Impressum. Ersetzen Sie diese Angaben durch die tatsächlichen Verantwortlichen und Kontaktdaten.
           </div>
         </div>
       </div>
