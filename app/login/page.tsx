@@ -54,7 +54,7 @@ export default function LoginPage() {
           <div>KIT Campus Süd, 76131 Karlsruhe</div>
           <div className="mt-1">
             <a
-              href="mailto:max@example.com"
+              href="mailto:ubuyn@student.kit.edu"
               className="text-sky-600 hover:underline"
             >
               ubuyn@student.kit.edu
