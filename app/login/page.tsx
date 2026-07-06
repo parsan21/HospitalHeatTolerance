@@ -59,7 +59,6 @@ export default function LoginPage() {
             >
               max@example.com
             </a>
-            {' • '}
           </div>
         </div>
       </footer>
