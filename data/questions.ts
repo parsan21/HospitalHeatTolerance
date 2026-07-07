@@ -164,7 +164,7 @@ const rawQuestions: Question[] = [
   {
     id: 'governance-8',
     category: 'governance',
-    text: 'Gibts es einen niedrigschwelligen Meldeweg für hitzebedingte Belastungen, Beschwerden oder Beinahe-Ereignisse des Personals',
+    text: 'Gibt es einen niedrigschwelligen Meldeweg für hitzebedingte Belastungen, Beschwerden oder Beinahe-Ereignisse des Personals',
     weight: 4,
     measureDescription: 'Schaffen Sie einen niedrigschwelligen Meldeweg für hitzebedingte Belastungen, Beschwerden und Beinahe-Ereignisse des Personals.',
   },
