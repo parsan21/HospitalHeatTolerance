@@ -1,124 +1,184 @@
-# Hospital Heat Resilience Assessment Platform
+# Hitzeschutz-Assessment für Krankenhäuser
+
+## Überblick
+
+Diese Anwendung ist ein webbasiertes Assessment-Tool für Krankenhäuser, mit dem die Hitzeschutz- und Hitzeresilienz-Strategie einer Einrichtung bewertet werden kann. Das Produkt richtet sich an Verantwortliche aus Klinikmanagement, Technik, Governance, Pflege und Klimaschutz.
+
+Die App besteht aus einem mehrstufigen Fragebogen mit gewichteten Fragen, einer Ergebnisübersicht und einem interaktiven Dashboard mit Empfehlungen für konkrete Verbesserungsmaßnahmen.
+
+## Was das Produkt heute kann
+
+- Mehrstufiges Assessment mit vier Kategorien
+- Zwei Fragetypen:
+  - Skala von 0 bis 4
+  - Ja/Nein-Fragen (boolesche Fragen)
+- Gewichtete Bewertung einzelner Fragen
+- Gesamtscore und Kategorien-Scores in Prozent
+- Interaktives Radar-Diagramm zur Visualisierung der Ergebnisse
+- Detaillierte Ansicht pro Kategorie mit Einzelbewertungen und Maßnahmenvorschlägen
+- Speicherung von Antworten und Fortschritt
+- Login-/Logout-Fluss über Supabase
+- Zurücksetzen des Assessments und Neustart an der Anfangsposition
+
+## Bewertete Kategorien
+
+Das Assessment ist aktuell in folgende Bereiche gegliedert:
+
+1. Klima & übergeordnete Fragen für den Klimaschutzbeauftragten
+2. Gebäude & Technik
+3. Governance & Kommunikation
+4. Personal, Versorgung & Patienten
+
+## Fragebogen und Bewertung
+
+Die Fragen werden pro Kategorie beantwortet. Für jede Frage wird eine Bewertung erfasst und anschließend gewichtet ausgewertet.
+
+Wichtige Aspekte der Bewertung:
+
+- Skalenfragen werden direkt auf der Skala 0 bis 4 bewertet.
+- Boolesche Fragen werden als Ja = 4 und Nein = 0 interpretiert.
+- Jede Frage hat eine individuelle Gewichtung.
+- Der Gesamtscore wird aus den gewichteten Ergebnissen berechnet und als Prozentsatz dargestellt.
+
+## Ergebnisdarstellung
+
+Nach Abschluss des Assessments erhalten Nutzer:innen:
+
+- eine Gesamtbewertung in Prozent
+- einen Kategorienvergleich über ein Radar-Diagramm
+- eine Detailansicht für jede Kategorie
+- Empfehlungen zu Maßnahmen, die auf Basis der Antworten generiert werden
+
+## Technischer Stack
+
+- Next.js 
+- React 
+- TypeScript
+- Tailwind CSS
+- Recharts für Diagramme
+- Supabase für Authentifizierung und Datenhaltung
+
+## Projektstruktur
+
+- app/: Seiten und Routen der Anwendung
+- components/: UI-Komponenten wie Fragebogen, Ergebnisansicht und Login
+- data/: Fragekatalog und Kategorien
+- lib/: Logik für Scoring, Supabase und Typen
+- supabase/: Datenbank-/Schema-Definitionen
+
+## Lokale Entwicklung
+
+1. Abhängigkeiten installieren
+   ```bash
+   npm install
+   ```
+2. Umgebungsvariablen für Supabase setzen
+   - NEXT_PUBLIC_SUPABASE_URL
+   - NEXT_PUBLIC_SUPABASE_ANON_KEY
+3. Entwicklungsserver starten
+   ```bash
+   npm run dev
+   ```
+4. Die Anwendung ist dann unter http://localhost:3000 verfügbar
+
+## Deployment
+
+Die Anwendung ist für den Einsatz auf Vercel vorbereitet und nutzt Supabase für die Authentifizierung und Speicherung der Assessment-Daten.
+
+## Ziel des Produkts
+
+Das Ziel ist es, Krankenhäusern eine einfache und strukturierte Möglichkeit zu geben, ihre Hitzeschutzfähigkeit zu beurteilen, Schwachstellen sichtbar zu machen und konkrete, priorisierte Maßnahmen für Verbesserungen abzuleiten.
+
+---
+
+# Hospital Heat Resilience Assessment for Hospitals
 
 ## Overview
 
-This project is a web-based assessment platform hosted on Vercel that enables hospitals to evaluate their preparedness and resilience against heat-related risks.
+This application is a web-based assessment tool for hospitals to evaluate their heat protection and heat resilience strategy. It is designed for stakeholders from hospital management, technical operations, governance, nursing, and climate protection.
 
-Hospitals complete a structured questionnaire consisting of multiple categories and weighted questions. Based on the responses, the platform calculates a heat resilience score, visualizes the results in an interactive radar (spider web) chart, and provides actionable recommendations to improve heat preparedness.
+The app consists of a multi-step questionnaire with weighted questions, an results overview, and an interactive dashboard with recommendations for concrete improvement measures.
 
-## Objectives
+## What the product offers today
 
-* Assess hospital heat resilience across multiple domains.
-* Identify strengths and weaknesses.
-* Provide a transparent scoring methodology.
-* Generate category-specific recommendations for improvement.
-* Support climate adaptation and heat action planning in healthcare facilities.
+- Multi-step assessment with four categories
+- Two question types:
+  - Scale from 0 to 4
+  - Yes/No questions (boolean questions)
+- Weighted evaluation of individual questions
+- Overall score and category scores in percent
+- Interactive radar chart for visualizing the results
+- Detailed view per category with individual ratings and suggested measures
+- Saving of answers and progress
+- Login/logout flow via Supabase
+- Resetting the assessment and restarting from the beginning
 
-## Assessment Categories
+## Assessment categories
 
-The questionnaire is organized into the following categories:
+The assessment is currently structured into the following areas:
 
-1. Climate Strategy & Cross-Cutting Questions
+1. Climate and overarching questions for the climate protection officer
+2. Buildings and technology
+3. Governance and communication
+4. Personnel, care, and patients
 
-   * Questions intended for climate officers or sustainability managers.
+## Questionnaire and scoring
 
-2. Buildings & Technical Infrastructure
+Questions are answered per category. Each response is recorded and then evaluated with weighting.
 
-   * Building design, cooling systems, shading, ventilation, emergency power, etc.
+Key aspects of the scoring:
 
-3. Governance & Communication
+- Scale questions are rated directly on a 0 to 4 scale.
+- Boolean questions are interpreted as Yes = 4 and No = 0.
+- Each question has an individual weight.
+- The overall score is calculated from the weighted results and displayed as a percentage.
 
-   * Policies, heat action plans, communication procedures, responsibilities.
+## Result presentation
 
-4. Workforce
+After completing the assessment, users receive:
 
-   * Staff protection, training, awareness, workload management during heat events.
+- an overall rating in percent
+- a category comparison via a radar chart
+- a detailed view for each category
+- recommendations for measures generated from the answers
 
-5. Care Delivery & Patients
+## Technical stack
 
-   * Patient protection measures, clinical procedures, vulnerable patient management.
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Recharts for charts
+- Supabase for authentication and data storage
 
-## Questionnaire
+## Project structure
 
-* Questions are answered on a numerical scale (e.g., 0–5).
-* Questions are grouped by category.
-* Individual questions can have different weights.
-* Weighted scores contribute to category scores and the overall heat resilience score.
+- app/: application pages and routes
+- components/: UI components such as the questionnaire, result view, and login
+- data/: question catalog and categories
+- lib/: scoring logic, Supabase, and types
+- supabase/: database and schema definitions
 
-## Scoring Methodology
+## Local development
 
-### Question Score
+1. Install dependencies
+   ```bash
+   npm install
+   ```
+2. Set Supabase environment variables
+   - NEXT_PUBLIC_SUPABASE_URL
+   - NEXT_PUBLIC_SUPABASE_ANON_KEY
+3. Start the development server
+   ```bash
+   npm run dev
+   ```
+4. The application is then available at http://localhost:3000
 
-Each question consists of:
+## Deployment
 
-* Answer value (0–5)
-* Weight factor
+The application is prepared for deployment on Vercel and uses Supabase for authentication and storage of assessment data.
 
-Weighted Score = Answer × Weight
+## Goal of the product
 
-### Category Score
+The goal is to give hospitals a simple and structured way to assess their heat protection capability, make weaknesses visible, and derive concrete, prioritized measures for improvement.
 
-Category Score = Sum of Weighted Scores / Maximum Possible Weighted Score
-
-The result is normalized to a percentage value (0–100).
-
-### Overall Score
-
-The overall score is calculated using all category scores and their respective weights.
-
-## Results Dashboard
-
-After completing the questionnaire, users receive:
-
-### Radar (Spider Web) Chart
-
-The chart visualizes performance across all categories:
-
-* Climate Strategy & Cross-Cutting Questions
-* Buildings & Technical Infrastructure
-* Governance & Communication
-* Workforce
-* Care Delivery & Patients
-
-### Interactive Category Details
-
-Users can click on any category to view:
-
-* Detailed score breakdown
-* Individual question results
-* Strengths and weaknesses
-* Suggested improvement measures
-
-## Recommendations Engine
-
-Each category contains predefined improvement measures linked to score thresholds.
-
-Example:
-
-* Score < 40% → Critical recommendations
-* Score 40–70% → Improvement recommendations
-* Score > 70% → Optimization recommendations
-
-Recommendations are maintained in a configurable data structure to allow future updates without changing application logic.
-
-## Technical Requirements
-
-### Frontend
-
-* Next.js
-* TypeScript
-* Tailwind CSS
-
-### Hosting
-
-* Vercel
-
-### Visualization
-
-* Radar/Spider Chart library (e.g., Recharts)
-
-### Data Management
-
-* Configurable question catalog
-* Configurable weighting system
-* Recommendation mapping
