@@ -3,12 +3,12 @@ import LoginForm from '../../components/LoginForm';
 export default function LoginPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 flex flex-col">
-      
-      {}
+
+      { }
       <div className="flex-1 flex items-center justify-center px-6 py-16">
         <div className="grid w-full max-w-6xl grid-cols-1 gap-12 lg:grid-cols-2 items-center">
-          
-          {}
+
+          { }
           <div className="space-y-6">
             <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
               Herzlich Willkommen beim Hospital Heat Resilience Assessment
@@ -48,16 +48,44 @@ export default function LoginPage() {
           <div>
             Verantwortlich:{' '}
             <span className="font-medium text-slate-900">
-              Azra Kutun
+              Jan-Niklas Weck, Median Akel, Jonas Schiele, Cladius Amon, Azra Kutun
             </span>
           </div>
           <div>KIT Campus Süd, 76131 Karlsruhe</div>
           <div className="mt-1">
             <a
+              href="mailto:uxhxu@student.kit.edu"
+              className="text-sky-600 hover:underline"
+            >
+              uxhxu@student.kit.edu (Jan-Niklas Weck)
+            </a>
+            {' • '}
+            <a
+              href="mailto:ubpts@student.kit.edu"
+              className="text-sky-600 hover:underline"
+            >
+              ubpts@student.kit.edu (Median Akel)
+            </a>
+            {' • '}
+            <a
+              href="mailto:uxzkj@student.kit.edu"
+              className="text-sky-600 hover:underline"
+            >
+              uxzkj@student.kit.edu (Jonas Schiele)
+            </a>
+            {' • '}
+            <a
+              href="mailto:uowlo@student.kit.edu"
+              className="text-sky-600 hover:underline"
+            >
+              uowlo@student.kit.edu (Claudius Amon)
+            </a>
+            {' • '}
+            <a
               href="mailto:ubuyn@student.kit.edu"
               className="text-sky-600 hover:underline"
             >
-              ubuyn@student.kit.edu
+              ubuyn@student.kit.edu (Azra Kutun)
             </a>
           </div>
         </div>
