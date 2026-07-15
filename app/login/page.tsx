@@ -51,7 +51,6 @@ export default function LoginPage() {
               Jan-Niklas Weck, Median Akel, Jonas Schiele, Cladius Amon, Azra Kutun
             </span>
           </div>
-          <div>KIT Campus Süd, 76131 Karlsruhe</div>
           <div className="mt-1">
             <a
               href="mailto:uxhxu@student.kit.edu"
